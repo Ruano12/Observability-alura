@@ -1,0 +1,11 @@
+Requisições GET e POST que deram status code 2xx ou 3xx com exceção da url do actuator
+http_server_requests_seconds_count{application="app-forum-api", method=~"GET|POST", status=~"2..|3..", uri!="/actuator/prometheus"}
+
+Requisições GET e POST que não retornou status code 2xx ou 3xx com exceção da url do actuator
+http_server_requests_seconds_count{application="app-forum-api", method=~"GET|POST", status!~"2..|3..", uri!="/actuator/prometheus"}
+
+Verificar crescimento de requisição na aplicação com exceção da url do actuator nos ultimos 5 minutos
+increase(http_server_requests_seconds_count{application="app-forum-api", uri!="/actuator/prometheus"}[5m])
+
+Verificar quantidade de chamada por segundo na aplicação com exceção da url do actuator nos ultimos 5 minutos
+irate(http_server_requests_seconds_count{application="app-forum-api", uri!="/actuator/prometheus"}[5m])
